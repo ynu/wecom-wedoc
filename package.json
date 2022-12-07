@@ -1,0 +1,27 @@
+{
+  "name": "wecom-wedoc",
+  "version": "1.0.0",
+  "description": "企业微信-文档 SDK",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynu/wecom-wedoc.git"
+  },
+  "author": "na57@qq.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ynu/wecom-wedoc/issues"
+  },
+  "homepage": "https://github.com/ynu/wecom-wedoc#readme",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "debug": "^4.3.4",
+    "wecom-common": "^2.1.2"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0"
+  }
+}
