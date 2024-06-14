@@ -4,7 +4,8 @@
   "description": "企业微信-文档 SDK",
   "main": "index.mjs",
   "scripts": {
-    "test": "mocha"
+    "compile": "tsc",
+    "test": "mocha --timeout 10000 -r ts-node/register test/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,13 @@
   "dependencies": {
     "axios": "^1.2.1",
     "debug": "^4.3.4",
-    "wecom-common": "^2.1.2"
+    "wecom-common": "^3.0.0"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.12",
+    "@types/memory-cache": "^0.2.5",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.14.2",
     "assert": "^2.0.0"
   }
 }
