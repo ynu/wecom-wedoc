@@ -4,7 +4,7 @@
 import axios from 'axios';
 import { WecomError, getToken, qyHost } from 'wecom-common';
 import Debug from 'debug';
-import { CellValueKeyType, CommonRecord, SheetRequestPrams } from './smart-sheet-sheet';
+import { SheetRequestPrams } from './smart-sheet-sheet';
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
@@ -65,6 +65,14 @@ export type AddFields = {
   }[]
 } & SheetRequestPrams
 
+export type UpdateFields = {
+  fields: {
+    field_id: string,
+    field_title?: string,
+    field_type: FieldType,
+    [key: string]: any,
+  }[]
+} & SheetRequestPrams
 /**
  * 查询字段
  * 本接口用于获取智能表中某个子表下字段信息，该接口可以完成下面三种功能：获取全部字段信息、依据字段名获取对应字段、依据字段 ID 获取对应字段信息。
@@ -93,7 +101,13 @@ export const add = async (params:AddFields, options:any) => {
 /**
  * 删除字段
  */
+export const del = async (params: { field_ids: string[] } & SheetRequestPrams, options:any) => {
+  // TODO
+}
 
 /**
  * 更新字段
  */
+export const update = async(params: UpdateFields, options:any) => {
+  // TODO
+}

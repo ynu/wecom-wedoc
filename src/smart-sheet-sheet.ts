@@ -20,7 +20,10 @@ export type SheetRequestPrams = {
 /**
  * 记录(CommonRecord)中key的类型
  */
-export type CellValueKeyType = 'CELL_VALUE_KEY_TYPE_FIELD_TITLE' | 'CELL_VALUE_KEY_TYPE_FIELD_ID';
+export enum CellValueKeyType {
+  FIELD_TITLE = 'CELL_VALUE_KEY_TYPE_FIELD_TITLE',
+  FIELD_ID = 'CELL_VALUE_KEY_TYPE_FIELD_ID'
+}
 
 export type CommonRecord = {
   record_id: string,
@@ -57,7 +60,6 @@ export const sheets = async (docid: string, options:any): Promise<any[]> => {
  */
 export const add = async (params: AddSheet, options:any): Promise<any> => {
   const token = await getToken(options);
-  console.log('##', token);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_sheet?access_token=${token}`, params);
   return res.data?.properties;
 }
@@ -79,5 +81,5 @@ export const update = async(docid: string, properties: {
   sheet_id: string,
   title:string,
 }, options: any) => {
-
+  // TODO
 }
