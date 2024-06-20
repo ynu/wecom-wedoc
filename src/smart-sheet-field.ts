@@ -62,7 +62,12 @@ export type AddFields = {
   fields: {
     field_title: string,
     field_type: FieldType,
+    [key: string]: any,
   }[]
+} & SheetRequestPrams
+
+export type DelFields = {
+  field_ids: string[]
 } & SheetRequestPrams
 
 export type UpdateFields = {
@@ -93,6 +98,7 @@ export const add = async (params:AddFields, options:any) => {
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_fields?access_token=${token}`, {
     docid: params.docid,
     sheet_id: params.sheet_id,
+    fields: params.fields,
   });
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
   return res.data?.fields;
@@ -101,13 +107,28 @@ export const add = async (params:AddFields, options:any) => {
 /**
  * 删除字段
  */
-export const del = async (params: { field_ids: string[] } & SheetRequestPrams, options:any) => {
-  // TODO
+export const del = async (params: DelFields, options:any) => {
+  const token = await getToken(options);
+  const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_fields?access_token=${token}`, {
+    docid: params.docid,
+    sheet_id: params.sheet_id,
+    field_ids: params.field_ids,
+  });
+  if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
+  return res.data;
 }
 
 /**
  * 更新字段
+ * 该接口只能更新字段名、字段属性，不能更新字段类型
  */
 export const update = async(params: UpdateFields, options:any) => {
-  // TODO
+  const token = await getToken(options);
+  const res = await axios.post(`${qyHost}/wedoc/smartsheet/update_fields?access_token=${token}`, {
+    docid: params.docid,
+    sheet_id: params.sheet_id,
+    fields: params.fields,
+  })
+  if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
+  return res.data;
 }
