@@ -1,5 +1,5 @@
 {
-  "name": "wecom-wedoc",
+  "name": "ynu-wecom-wedoc",
   "version": "2.0.0",
   "description": "企业微信-文档 SDK",
   "main": "dist/index.js",
