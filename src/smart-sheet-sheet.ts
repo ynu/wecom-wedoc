@@ -38,6 +38,14 @@ export type AddSheet = {
   },
 }
 
+export type UpdateSheet = {
+  docid: string,
+  properties: {
+    sheet_id: string,
+    title: string,
+  },
+}
+
 /**
 * 查询子表
 * 本接口用于查询一篇在线表格中全部智能表信息。
@@ -67,7 +75,7 @@ export const add = async (params: AddSheet, options:any): Promise<any> => {
 /**
  * 删除子表
  */
-export const del = async (params:SheetRequestPrams, options:any) => {
+export const del = async (params: SheetRequestPrams, options:any) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_sheet?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
@@ -76,10 +84,11 @@ export const del = async (params:SheetRequestPrams, options:any) => {
 
 /**
  * 更新子表
+ * 用于修改表格中某个子表的标题
  */
-export const update = async(docid: string, properties: {
-  sheet_id: string,
-  title:string,
-}, options: any) => {
-  // TODO
+export const update = async(params: UpdateSheet, options: any) => {
+  const token = await getToken(options);
+  const res = await axios.post(`${qyHost}/wedoc/smartsheet/update_sheet?access_token=${token}`, params);
+  if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
+  return 0;
 }
