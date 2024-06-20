@@ -9,6 +9,11 @@ const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
 const debug = Debug('wecom-wedoc:debug');
 
+export enum DocType {
+  Document = 3,
+  SpreadSheet = 4,
+  SmartSheet = 10,
+}
 export type CreateDocProps = {
   /**
    * 空间ID
@@ -28,7 +33,7 @@ export type CreateDocProps = {
    * 4: 表格
    * 10: 智能表格（目前仅支持自建应用创建）
    */
-  doc_type: 3|4|10,
+  doc_type: DocType,
 
   /**
    * 文档名称
