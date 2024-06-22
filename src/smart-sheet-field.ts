@@ -58,13 +58,18 @@ export enum FieldType {
   FIELD_TYPE_AUTONUMBER = 'FIELD_TYPE_AUTONUMBER'
 }
 
+export type AddField = {
+  // field_id?: string,
+  field_title: string,
+  field_type: FieldType,
+  [key: string]: any,
+}
+
 export type AddFields = {
-  fields: {
-    field_title: string,
-    field_type: FieldType,
-    [key: string]: any,
-  }[]
+  fields: AddField[],
 } & SheetRequestPrams
+
+
 
 export type DelFields = {
   field_ids: string[]
@@ -95,11 +100,8 @@ export const fields = async (params: SheetRequestPrams, options:any): Promise<an
  */
 export const add = async (params:AddFields, options:any) => {
   const token = await getToken(options);
-  const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_fields?access_token=${token}`, {
-    docid: params.docid,
-    sheet_id: params.sheet_id,
-    fields: params.fields,
-  });
+  console.log(params);
+  const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_fields?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
   return res.data?.fields;
 }
@@ -131,4 +133,201 @@ export const update = async(params: UpdateFields, options:any) => {
   })
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
   return res.data;
+}
+
+export type NumberFieldProperty = {
+  /**
+   * 表示小数点的位数，即数字精度
+   */
+  decimal_places: number,
+  /**
+   * 是否使用千位符，设置此属性后数字字段将以英文逗号分隔千分位，如 1,000
+   */
+  use_separate: boolean,
+}
+export type AddNumberField = {
+  field_title: string,
+} & NumberFieldProperty & SheetRequestPrams
+export const addNumberField = (params:AddNumberField, options:any) => {
+  const { docid, sheet_id, field_title, ...property_number } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_NUMBER,
+      property_number,
+    }],
+  }, options);
+}
+
+// CheckboxFieldProperty
+export type CheckboxFieldProperty = {
+  /**
+   * 新增时是否默认勾选
+   */
+  checked: boolean;
+}
+
+export type addCheckboxField = (params:any, options:any) => {
+  // TODO
+}
+
+// DateTimeFieldProperty
+export type DateTimeFieldProperty = {
+  /**
+   * 设置日期格式
+   */
+  format: string;
+  /**
+   * 新建记录时，是否自动填充时间
+   */
+  auto_fill: boolean;
+}
+// TODO addDateTimeFieldProperty
+
+// AttachmentFieldProperty
+export type AttachmentFieldProperty = {
+  /**
+   * 设置文件展示方式
+   */
+  display_mode: string; // 这里假设display_mode是一个字符串类型，具体值需要根据实际API文档定义
+}
+
+// UserFieldProperty
+export type UserFieldProperty = {
+  /**
+   * 允许添加多个人员
+   */
+  is_multiple: boolean;
+  /**
+   * 添加人员时通知用户
+   */
+  is_notified: boolean;
+}
+
+// UrlFieldProperty
+export type UrlFieldProperty = {
+  /**
+   * 超链接展示样式
+   */
+  type: string; // 这里假设type是一个字符串类型，具体值需要根据实际API文档定义
+}
+
+// SelectFieldProperty
+export type SelectFieldProperty = {
+  /**
+   * 是否允许填写时新增选项
+   */
+  is_quick_add: boolean;
+  /**
+   * 多选选项的格式设置
+   */
+  options: Array<{
+    // 这里定义options对象的结构，具体属性需要根据实际API文档定义
+    key: string; // 假设有一个key属性
+    label: string; // 假设有一个label属性
+  }>;
+}
+
+// CreatedTimeFieldProperty & ModifiedTimeFieldProperty
+export type TimeFieldProperty = {
+  /**
+   * 设置日期格式
+   */
+  format: string;
+}
+
+// ProgressFieldProperty
+export type ProgressFieldProperty = {
+  /**
+   * 小数位数
+   */
+  decimal_places: number;
+}
+
+// SingleSelectFieldProperty
+export type SingleSelectFieldProperty = {
+  /**
+   * 是否允许填写时新增选项
+   */
+  is_quick_add: boolean;
+  /**
+   * 单选选项的格式设置
+   */
+  options: Array<{
+    // 这里定义options对象的结构，具体属性需要根据实际API文档定义
+    key: string;
+    label: string;
+  }>;
+}
+
+// ReferenceFieldProperty
+export type ReferenceFieldProperty = {
+  /**
+   * 关联的子表id
+   */
+  sub_id: string;
+  /**
+   * 关联的字段id
+   */
+  filed_id: string;
+  /**
+   * 是否允许多选
+   */
+  is_multiple: boolean;
+  /**
+   * 视图id
+   */
+  view_id: string;
+}
+
+// LocationFieldProperty
+export type LocationFieldProperty = {
+  /**
+   * 输入类型
+   */
+  input_type: string; // 这里假设input_type是一个字符串类型，具体值需要根据实际API文档定义
+}
+
+// AutoNumberFieldProperty
+export type AutoNumberFieldProperty = {
+  /**
+   * 输入类型
+   */
+  type: string; // 这里假设type是一个字符串类型，具体值需要根据实际API文档定义
+  /**
+   * 自定义规则
+   */
+  rules: Array<{
+    // 这里定义rules对象的结构，具体属性需要根据实际API文档定义
+  }>;
+  /**
+   * 是否应用于已有编号
+   */
+  reformat_existing_record: boolean;
+}
+
+// CurrencyFieldProperty
+export type CurrencyFieldProperty = {
+  /**
+   * 输入类型
+   */
+  currency_type: string; // 这里假设currency_type是一个字符串类型，具体值需要根据实际API文档定义
+  /**
+   * 表示小数点的位数，即数字精度
+   */
+  decimal_places: number;
+  /**
+   * 是否使用千位符
+   */
+  use_separate: boolean;
+}
+
+// WwGroupFieldProperty
+export type WwGroupFieldProperty = {
+  /**
+   * 是否允许多个群聊
+   */
+  allow_multiple: boolean;
 }
