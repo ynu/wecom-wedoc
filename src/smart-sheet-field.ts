@@ -161,6 +161,26 @@ export const addNumberField = (params:AddNumberField, options:any) => {
   }, options);
 }
 
+export type UpdateNumberField = {
+  field_id: string,
+  field_title?: string,
+} & NumberFieldProperty & SheetRequestPrams
+export const updateNumberField = (params: UpdateNumberField, options:any) => {
+  const { docid, sheet_id, field_title, field_id, ...property_number } = params;
+  let field = {
+    field_id,
+    field_type: FieldType.FIELD_TYPE_NUMBER,
+    field_title,
+    property_number,
+  };
+  if (!field_title) delete field.field_title;
+  return update({
+    fields: [field],
+    docid,
+    sheet_id,
+  }, options);
+}
+
 // CheckboxFieldProperty
 export type CheckboxFieldProperty = {
   /**
