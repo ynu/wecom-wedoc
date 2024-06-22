@@ -2,7 +2,7 @@
  * 企业微信API-文档-智能表格操作-记录
  */
 import axios from 'axios';
-import {getToken, qyHost, WecomError} from 'wecom-common';
+import {GetToken, getToken, qyHost, WecomError} from 'wecom-common';
 import Debug from 'debug';
 import { CellValueKeyType, CommonRecord, SheetRequestPrams } from './smart-sheet-sheet';
 import {FieldType} from "./smart-sheet-field";
@@ -32,7 +32,7 @@ export enum ViewType {
  * 本接口用于获取 Smartsheet 中某个子表里全部视图信息。
  * https://developer.work.weixin.qq.com/document/path/99913
  */
-export const views = async (docid: string, sheet_id: string, options:any): Promise<any[]> => {
+export const views = async (docid: string, sheet_id: string, options: GetToken): Promise<any[]> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/get_views?access_token=${token}`, {
     docid,
@@ -49,7 +49,7 @@ export const add = async (params: SheetRequestPrams & {
   view_type: string,
   property_gantt?: object,
   property_calendar?: object,
-}, options:any) => {
+}, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_view?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
@@ -59,7 +59,7 @@ export const add = async (params: SheetRequestPrams & {
 /**
  * 删除视图
  */
-export const del = async (params:SheetRequestPrams & { view_ids: string[] }, options:any) => {
+export const del = async (params:SheetRequestPrams & { view_ids: string[] }, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_views?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
@@ -74,7 +74,7 @@ export const update = async (params:SheetRequestPrams & {
   view_id: string,
   view_title?: string,
   property?: object,
-}, options:any) => {
+}, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/update_view?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);

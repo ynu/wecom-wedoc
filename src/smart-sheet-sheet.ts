@@ -2,7 +2,7 @@
  * 企业微信API-文档-智能表格操作
  */
 import axios from 'axios';
-import { WecomError, getToken, qyHost } from 'wecom-common';
+import { GetToken, WecomError, getToken, qyHost } from 'wecom-common';
 import Debug from 'debug';
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
@@ -52,7 +52,7 @@ export type UpdateSheet = {
 * @see https://developer.work.weixin.qq.com/document/path/99911
 * @returns 
 */
-export const sheets = async (docid: string, options:any): Promise<any[]> => {
+export const sheets = async (docid: string, options: GetToken): Promise<any[]> => {
  const token = await getToken(options);
  const res = await axios.post(`${qyHost}/wedoc/smartsheet/get_sheet?access_token=${token}`, {
    docid,
@@ -66,7 +66,7 @@ export const sheets = async (docid: string, options:any): Promise<any[]> => {
  * 本接口用于在表格的某个位置添加一个智能表，该智能表不存在视图、记录和字段，可以使用 API 在该智能表中添加视图、记录和字段。
  * @see https://developer.work.weixin.qq.com/document/path/99896
  */
-export const add = async (params: AddSheet, options:any): Promise<any> => {
+export const add = async (params: AddSheet, options: GetToken): Promise<any> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_sheet?access_token=${token}`, params);
   return res.data?.properties;
@@ -75,7 +75,7 @@ export const add = async (params: AddSheet, options:any): Promise<any> => {
 /**
  * 删除子表
  */
-export const del = async (params: SheetRequestPrams, options:any) => {
+export const del = async (params: SheetRequestPrams, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_sheet?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);

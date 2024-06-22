@@ -2,7 +2,7 @@
  * 企业微信API-文档-智能表格操作-记录
  */
 import axios from 'axios';
-import { WecomError, getToken, qyHost } from 'wecom-common';
+import { GetToken, WecomError, getToken, qyHost } from 'wecom-common';
 import Debug from 'debug';
 import { SheetRequestPrams } from './smart-sheet-sheet';
 const warn = Debug('wecom-wedoc:warn');
@@ -59,7 +59,6 @@ export enum FieldType {
 }
 
 export type AddField = {
-  // field_id?: string,
   field_title: string,
   field_type: FieldType,
   [key: string]: any,
@@ -88,7 +87,7 @@ export type UpdateFields = {
  * 本接口用于获取智能表中某个子表下字段信息，该接口可以完成下面三种功能：获取全部字段信息、依据字段名获取对应字段、依据字段 ID 获取对应字段信息。
  * @see https://developer.work.weixin.qq.com/document/path/99914
  */
-export const fields = async (params: SheetRequestPrams, options:any): Promise<any[]> => {
+export const fields = async (params: SheetRequestPrams, options:GetToken): Promise<any[]> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/get_fields?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
@@ -98,9 +97,8 @@ export const fields = async (params: SheetRequestPrams, options:any): Promise<an
 /**
  * 添加字段
  */
-export const add = async (params:AddFields, options:any) => {
+export const add = async (params:AddFields, options: GetToken) => {
   const token = await getToken(options);
-  console.log(params);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_fields?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
   return res.data?.fields;
@@ -109,7 +107,7 @@ export const add = async (params:AddFields, options:any) => {
 /**
  * 删除字段
  */
-export const del = async (params: DelFields, options:any) => {
+export const del = async (params: DelFields, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_fields?access_token=${token}`, {
     docid: params.docid,
@@ -124,7 +122,7 @@ export const del = async (params: DelFields, options:any) => {
  * 更新字段
  * 该接口只能更新字段名、字段属性，不能更新字段类型
  */
-export const update = async(params: UpdateFields, options:any) => {
+export const update = async(params: UpdateFields, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/update_fields?access_token=${token}`, {
     docid: params.docid,
@@ -148,7 +146,7 @@ export type NumberFieldProperty = {
 export type AddNumberField = {
   field_title: string,
 } & NumberFieldProperty & SheetRequestPrams
-export const addNumberField = (params:AddNumberField, options:any) => {
+export const addNumberField = (params:AddNumberField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_number } = params;
   return add({
     docid,
@@ -165,7 +163,7 @@ export type UpdateNumberField = {
   field_id: string,
   field_title?: string,
 } & NumberFieldProperty & SheetRequestPrams
-export const updateNumberField = (params: UpdateNumberField, options:any) => {
+export const updateNumberField = (params: UpdateNumberField, options: GetToken) => {
   const { docid, sheet_id, field_title, field_id, ...property_number } = params;
   let field = {
     field_id,
@@ -189,7 +187,7 @@ export type CheckboxFieldProperty = {
   checked: boolean;
 }
 
-export type addCheckboxField = (params:any, options:any) => {
+export type addCheckboxField = (params:any, options: GetToken) => {
   // TODO
 }
 

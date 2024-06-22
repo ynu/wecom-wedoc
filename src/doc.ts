@@ -2,7 +2,7 @@
  * 企业微信API-文档
  */
 import axios from 'axios';
-import { getToken, qyHost } from 'wecom-common';
+import { GetToken, getToken, qyHost } from 'wecom-common';
 import Debug from 'debug';
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
@@ -61,7 +61,7 @@ export type DeleteDocProps = {
 /**
  * 新建文档 https://developer.work.weixin.qq.com/document/path/97460
  */
-export const create = async (params:CreateDocProps, options: any) => {
+export const create = async (params:CreateDocProps, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/create_doc?access_token=${token}`, params);
   return res.data;
@@ -71,13 +71,13 @@ export const create = async (params:CreateDocProps, options: any) => {
  * 删除文档
  * https://developer.work.weixin.qq.com/document/path/97735
  */
-export const del = async (params:DeleteDocProps, options: any) => {
+export const del = async (params:DeleteDocProps, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/del_doc?access_token=${token}`, params);
   return res.data;
 }
 
-export const share = async (params: any, options: any) => {
+export const share = async (params: any, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/doc_share?access_token=${token}`, {
     ...params,
@@ -85,7 +85,7 @@ export const share = async (params: any, options: any) => {
   return res.data.share_url;
 }
 
-export const rename = async (params: any, new_name: any, options = {}) => {
+export const rename = async (params: any, new_name: any, options: GetToken) => {
   const token = await getToken(options);
   await axios.post(`${qyHost}/wedoc/rename_doc?access_token=${token}`, {
     ...params,
