@@ -55,8 +55,186 @@ export enum FieldType {
   // 群
   FIELD_TYPE_WWGROUP = 'FIELD_TYPE_WWGROUP',
   // 自动编号
-  FIELD_TYPE_AUTONUMBER = 'FIELD_TYPE_AUTONUMBER'
+  FIELD_TYPE_AUTONUMBER = 'FIELD_TYPE_AUTONUMBER',
 }
+
+// 定义小数点后的位数
+export enum DecimalPlaces {
+  // 显示原值
+  MINUS_ONE = -1,
+  // 代表整数
+  ZERO = 0,
+  // 精确到小数点后一位（1.0）
+  ONE = 1,
+  // 精确到小数点后一位（1.0）
+  TWO = 2,
+  // 精确到小数点后一位（1.0）
+  THREE = 3,
+  // 精确到小数点后一位（1.0）
+  FOUR = 4,
+}
+
+// 展示样式
+export enum DisplayMode {
+  // 列表样式
+  DISPLAY_MODE_LIST = 'DISPLAY_MODE_LIST',
+  // 宫格样式
+  DISPLAY_MODE_GRID = 'DISPLAY_MODE_GRID',
+}
+
+// 超链接展示样式
+export enum LinkType {
+  // 文字
+  LINK_TYPE_PURE_TEXT = 'LINK_TYPE_PURE_TEXT',
+  // 图标文字
+  LINK_TYPE_ICON_TEXT = 'LINK_TYPE_ICON_TEXT',
+}
+
+// 自动编号类型
+export enum NumberType {
+  // 自增数字类型
+  NUMBER_TYPE_INCR = 'NUMBER_TYPE_INCR',
+  // 自定义类型
+  NUMBER_TYPE_CUSTOM = 'NUMBER_TYPE_CUSTOM',
+}
+
+// 数字规则类型
+export enum NumberRuleType {
+  // 自增数字类型
+  NUMBER_RULE_TYPE_INCR = 'NUMBER_RULE_TYPE_INCR',
+  // 固定字符
+  NUMBER_RULE_TYPE_FIXED_CHAR = 'NUMBER_RULE_TYPE_FIXED_CHAR',
+  // 创建时间
+  NUMBER_RULE_TYPE_TIME = 'NUMBER_RULE_TYPE_TIME',
+}
+
+// 货币符号类型
+export enum CurrencyType {
+  // 人民币
+  CNY = 'CURRENCY_TYPE_CNY',
+  // 美元
+  USD = 'CURRENCY_TYPE_USD',
+  // 欧元
+  EUR = 'CURRENCY_TYPE_EUR',
+  // 英镑
+  GBP = 'CURRENCY_TYPE_GBP',
+  // 日元
+  JPY = 'CURRENCY_TYPE_JPY',
+  // 韩元
+  KRW = 'CURRENCY_TYPE_KRW',
+  // 港元
+  HKD = 'CURRENCY_TYPE_HKD',
+  // 澳门元
+  MOP = 'CURRENCY_TYPE_MOP',
+  // 新台币
+  TWD = 'CURRENCY_TYPE_TWD',
+  // 阿联酋迪拉姆
+  AED = 'CURRENCY_TYPE_AED',
+  // 澳大利亚元
+  AUD = 'CURRENCY_TYPE_AUD',
+  // 巴西雷亚尔
+  BRL = 'CURRENCY_TYPE_BRL',
+  // 加拿大元
+  CAD = 'CURRENCY_TYPE_CAD',
+  // 瑞士法郎
+  CHF = 'CURRENCY_TYPE_CHF',
+  // 印尼卢比
+  IDR = 'CURRENCY_TYPE_IDR',
+  // 印度卢比
+  INR = 'CURRENCY_TYPE_INR',
+  // 墨西哥比索
+  MXN = 'CURRENCY_TYPE_MXN',
+  // 马来西亚林吉特
+  MYR = 'CURRENCY_TYPE_MYR',
+  // 菲律宾比索
+  PHP = 'CURRENCY_TYPE_PHP',
+  // 波兰兹罗提
+  PLN = 'CURRENCY_TYPE_PLN',
+  // 俄罗斯卢布
+  RUB = 'CURRENCY_TYPE_RUB',
+  // 新加坡元
+  SGD = 'CURRENCY_TYPE_SGD',
+  // 泰国铢
+  THB = 'CURRENCY_TYPE_THB',
+  // 土耳其里拉
+  TRY = 'CURRENCY_TYPE_TRY',
+  // 越南盾
+  VND = 'CURRENCY_TYPE_VND'
+}
+
+// 自动编号规则
+export type NumberRule = {
+  type: NumberRuleType,
+  value: string,
+}
+
+// 创建时间格式,目前应用于自动编号规则中的value字段
+export enum CreateTimeFormat {
+  // 格式说明：20240301
+  YYYYMMDD = 'YYYYMMDD',
+  // 格式说明：202403
+  YYYYMM = 'YYYYMM',
+  // 格式说明：0301
+  MMDD = 'MMDD',
+  // 格式说明：2024
+  YYYY = 'YYYY',
+  // 格式说明：03
+  MM = 'MM',
+  // 格式说明：01
+  DD = 'DD',
+}
+
+// 选项颜色
+export enum Style {
+  // 浅红
+  ONE = 1,
+  // 浅橙
+  TWO = 2,
+  // 浅天蓝
+  THREE = 3,
+  // 浅绿
+  FOUR = 4,
+  // 浅紫
+  FIVE = 5,
+  // 浅粉红
+  SIX = 6,
+  // 浅灰
+  SEVEN = 7,
+  // 白
+  EIGHT = 8,
+}
+
+// 地理位置输入类型
+export enum LocationInputType {
+  // 手动输入
+  LOCATION_INPUT_TYPE_MANUAL = 'LOCATION_INPUT_TYPE_MANUAL',
+  // 自动定位
+  LOCATION_INPUT_TYPE_AUTO = 'LOCATION_INPUT_TYPE_AUTO',
+}
+
+// 多选和单选的选项参数
+export type Option = {
+  // 选项ID
+  id?: string;
+  // 要填写的选项内容
+  text: string;
+  // 选项颜色
+  style: Style;
+}
+
+/**
+ * 设置日期格式
+ * "yyyy"年"m"月"d"日""            2018 年 4 月 20 日
+ * "yyyy-mm-dd"                   2018-04-20
+ * "yyyy/m/d"                     2018/4/20
+ * "m"月"d"日""                    4 月 20 日
+ * "yyyy"年"m"月"d"日" dddd"       2018 年 4 月 20 日 星期五
+ * "yyyy"年"m"月"d"日" hh:mm"      2018 年 4 月 20 日 14:00
+ * "yyyy-mm-dd hh:mm"             2018-04-20 14:00
+ * "m/d/yyyy"                     4/20/2018
+ * "d/m/yyyy"                     20/4/2018
+ */
+export type Format = string
 
 export type AddField = {
   field_title: string,
@@ -67,8 +245,6 @@ export type AddField = {
 export type AddFields = {
   fields: AddField[],
 } & SheetRequestPrams
-
-
 
 export type DelFields = {
   field_ids: string[]
@@ -96,6 +272,7 @@ export const fields = async (params: SheetRequestPrams, options:GetToken): Promi
 
 /**
  * 添加字段
+ * 字段名不能同名，否则报错
  */
 export const add = async (params:AddFields, options: GetToken) => {
   const token = await getToken(options);
@@ -121,6 +298,7 @@ export const del = async (params: DelFields, options: GetToken) => {
 /**
  * 更新字段
  * 该接口只能更新字段名、字段属性，不能更新字段类型
+ * 字段名不能修改为已存在的字段名，否则报错
  */
 export const update = async(params: UpdateFields, options: GetToken) => {
   const token = await getToken(options);
@@ -137,7 +315,7 @@ export type NumberFieldProperty = {
   /**
    * 表示小数点的位数，即数字精度
    */
-  decimal_places: number,
+  decimal_places: DecimalPlaces,
   /**
    * 是否使用千位符，设置此属性后数字字段将以英文逗号分隔千分位，如 1,000
    */
@@ -187,29 +365,128 @@ export type CheckboxFieldProperty = {
   checked: boolean;
 }
 
-export type addCheckboxField = (params:any, options: GetToken) => {
-  // TODO
+export type AddCheckboxField = {
+  field_title: string,
+} & CheckboxFieldProperty & SheetRequestPrams
+
+export const addCheckboxField = (params:AddCheckboxField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_checkbox } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_CHECKBOX,
+      property_checkbox,
+    }],
+  }, options);
+}
+
+export type UpdateCheckboxField = {
+  field_id: string,
+  field_title?: string,
+} & CheckboxFieldProperty & SheetRequestPrams
+
+export const updateCheckboxField = (params:UpdateCheckboxField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_checkbox } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_CHECKBOX,
+      property_checkbox,
+    }],
+  }, options);
 }
 
 // DateTimeFieldProperty
 export type DateTimeFieldProperty = {
-  /**
-   * 设置日期格式
-   */
-  format: string;
+  format: Format;
   /**
    * 新建记录时，是否自动填充时间
    */
   auto_fill: boolean;
 }
-// TODO addDateTimeFieldProperty
+export type AddDateTimeField = {
+  field_title: string,
+} & DateTimeFieldProperty & SheetRequestPrams
+
+export const addDateTimeField = (params:AddDateTimeField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_datetime } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_DATE_TIME,
+      property_datetime,
+    }],
+  }, options);
+}
+
+export type UpdateDateTimeField = {
+  field_id: string,
+  field_title?: string,
+} & DateTimeFieldProperty & SheetRequestPrams
+
+export const updateDateTimeField = (params:UpdateDateTimeField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_datetime } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_DATE_TIME,
+      property_datetime,
+    }],
+  }, options);
+}
 
 // AttachmentFieldProperty
 export type AttachmentFieldProperty = {
   /**
    * 设置文件展示方式
    */
-  display_mode: string; // 这里假设display_mode是一个字符串类型，具体值需要根据实际API文档定义
+  display_mode: DisplayMode;
+}
+
+export type AddAttachmentField = {
+  field_title: string,
+} & AttachmentFieldProperty & SheetRequestPrams
+
+export const addAttachmentField = (params:AddAttachmentField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_attachment } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_ATTACHMENT,
+      property_attachment,
+    }],
+  }, options);
+}
+
+export type UpdateAttachmentField = {
+  field_id: string,
+  field_title?: string,
+} & AttachmentFieldProperty & SheetRequestPrams
+
+export const updateAttachmentField = (params:UpdateAttachmentField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_attachment } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_ATTACHMENT,
+      property_attachment,
+    }],
+  }, options);
 }
 
 // UserFieldProperty
@@ -224,12 +501,84 @@ export type UserFieldProperty = {
   is_notified: boolean;
 }
 
+export type AddUserField = {
+  field_title: string,
+} & UserFieldProperty & SheetRequestPrams
+
+export const addUserField = (params:AddUserField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_user } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_USER,
+      property_user,
+    }],
+  }, options);
+}
+
+export type UpdateUserField = {
+  field_id: string,
+  field_title?: string,
+} & UserFieldProperty & SheetRequestPrams
+
+export const updateUserField = (params:UpdateUserField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_user } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_USER,
+      property_user,
+    }],
+  }, options);
+}
+
 // UrlFieldProperty
 export type UrlFieldProperty = {
   /**
    * 超链接展示样式
    */
-  type: string; // 这里假设type是一个字符串类型，具体值需要根据实际API文档定义
+  type: LinkType;
+}
+
+export type AddUrlField = {
+  field_title: string,
+} & UrlFieldProperty & SheetRequestPrams
+
+export const addUrlField = (params:AddUrlField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_url } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_URL,
+      property_url,
+    }],
+  }, options);
+}
+
+export type UpdateUrlField = {
+  field_id: string,
+  field_title?: string,
+} & UrlFieldProperty & SheetRequestPrams
+
+export const updateUrlField = (params:UpdateUrlField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_url } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_URL,
+      property_url,
+    }],
+  }, options);
 }
 
 // SelectFieldProperty
@@ -241,11 +590,43 @@ export type SelectFieldProperty = {
   /**
    * 多选选项的格式设置
    */
-  options: Array<{
-    // 这里定义options对象的结构，具体属性需要根据实际API文档定义
-    key: string; // 假设有一个key属性
-    label: string; // 假设有一个label属性
-  }>;
+  options: Array<Option>;
+}
+
+export type AddSelectField = {
+  field_title: string,
+} & SelectFieldProperty & SheetRequestPrams
+
+export const addSelectField = (params:AddSelectField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_select } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_SELECT,
+      property_select,
+    }],
+  }, options);
+}
+
+export type UpdateSelectField = {
+  field_id: string,
+  field_title?: string,
+} & SelectFieldProperty & SheetRequestPrams
+
+export const updateSelectField = (params:UpdateSelectField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_select } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_SELECT,
+      property_select,
+    }],
+  }, options);
 }
 
 // CreatedTimeFieldProperty & ModifiedTimeFieldProperty
@@ -253,7 +634,79 @@ export type TimeFieldProperty = {
   /**
    * 设置日期格式
    */
-  format: string;
+  format: Format;
+}
+
+export type AddCreatedTimeField = {
+  field_title: string,
+} & TimeFieldProperty & SheetRequestPrams
+
+export const addCreatedTimeField = (params:AddCreatedTimeField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_time } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_CREATED_TIME,
+      property_time,
+    }],
+  }, options);
+}
+
+export type UpdateCreatedTimeField = {
+  field_id: string,
+  field_title?: string,
+} & TimeFieldProperty & SheetRequestPrams
+
+export const updateCreatedTimeField = (params:UpdateCreatedTimeField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_time } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_CREATED_TIME,
+      property_time,
+    }],
+  }, options);
+}
+
+export type AddModifiedTimeField = {
+  field_title: string,
+} & TimeFieldProperty & SheetRequestPrams
+
+export const addModifiedTimeField = (params:AddModifiedTimeField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_time } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_MODIFIED_TIME,
+      property_time,
+    }],
+  }, options);
+}
+
+export type UpdateModifiedTimeField = {
+  field_id: string,
+  field_title?: string,
+} & TimeFieldProperty & SheetRequestPrams
+
+export const updateModifiedTimeField = (params:UpdateModifiedTimeField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_time } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_MODIFIED_TIME,
+      property_time,
+    }],
+  }, options);
 }
 
 // ProgressFieldProperty
@@ -261,7 +714,43 @@ export type ProgressFieldProperty = {
   /**
    * 小数位数
    */
-  decimal_places: number;
+  decimal_places: DecimalPlaces;
+}
+
+export type AddProgressField = {
+  field_title: string,
+} & ProgressFieldProperty & SheetRequestPrams
+
+export const addProgressField = (params:AddProgressField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_progress } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_PROGRESS,
+      property_progress,
+    }],
+  }, options);
+}
+
+export type UpdateProgressField = {
+  field_id: string,
+  field_title?: string,
+} & ProgressFieldProperty & SheetRequestPrams
+
+export const updateProgressField = (params:UpdateProgressField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_progress } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_PROGRESS,
+      property_progress,
+    }],
+  }, options);
 }
 
 // SingleSelectFieldProperty
@@ -273,11 +762,43 @@ export type SingleSelectFieldProperty = {
   /**
    * 单选选项的格式设置
    */
-  options: Array<{
-    // 这里定义options对象的结构，具体属性需要根据实际API文档定义
-    key: string;
-    label: string;
-  }>;
+  options: Array<Option>;
+}
+
+export type AddSingleSelectField = {
+  field_title: string,
+} & SingleSelectFieldProperty & SheetRequestPrams
+
+export const addSingleSelectField = (params:AddSingleSelectField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_singleSelect } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_SINGLE_SELECT,
+      property_singleSelect,
+    }],
+  }, options);
+}
+
+export type UpdateSingleSelectField = {
+  field_id: string,
+  field_title?: string,
+} & SingleSelectFieldProperty & SheetRequestPrams
+
+export const updateSingleSelectField = (params:UpdateSingleSelectField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_singleSelect } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_SINGLE_SELECT,
+      property_singleSelect,
+    }],
+  }, options);
 }
 
 // ReferenceFieldProperty
@@ -285,7 +806,7 @@ export type ReferenceFieldProperty = {
   /**
    * 关联的子表id
    */
-  sub_id: string;
+  sub_id?: string;
   /**
    * 关联的字段id
    */
@@ -297,7 +818,43 @@ export type ReferenceFieldProperty = {
   /**
    * 视图id
    */
-  view_id: string;
+  view_id?: string;
+}
+
+export type AddReferenceField = {
+  field_title: string,
+} & ReferenceFieldProperty & SheetRequestPrams
+
+export const addReferenceField = (params:AddReferenceField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_reference } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_REFERENCE,
+      property_reference,
+    }],
+  }, options);
+}
+
+export type UpdateReferenceField = {
+  field_id: string,
+  field_title?: string,
+} & ReferenceFieldProperty & SheetRequestPrams
+
+export const updateReferenceField = (params:UpdateReferenceField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_reference } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_REFERENCE,
+      property_reference,
+    }],
+  }, options);
 }
 
 // LocationFieldProperty
@@ -305,7 +862,43 @@ export type LocationFieldProperty = {
   /**
    * 输入类型
    */
-  input_type: string; // 这里假设input_type是一个字符串类型，具体值需要根据实际API文档定义
+  input_type: LocationInputType;
+}
+
+export type AddLocationField = {
+  field_title: string,
+} & LocationFieldProperty & SheetRequestPrams
+
+export const addLocationField = (params:AddLocationField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_location } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_LOCATION,
+      property_location,
+    }],
+  }, options);
+}
+
+export type UpdateLocationField = {
+  field_id: string,
+  field_title?: string,
+} & LocationFieldProperty & SheetRequestPrams
+
+export const updateLocationField = (params:UpdateLocationField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_location } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_LOCATION,
+      property_location,
+    }],
+  }, options);
 }
 
 // AutoNumberFieldProperty
@@ -313,17 +906,51 @@ export type AutoNumberFieldProperty = {
   /**
    * 输入类型
    */
-  type: string; // 这里假设type是一个字符串类型，具体值需要根据实际API文档定义
+  type: NumberType;
   /**
    * 自定义规则
    */
-  rules: Array<{
-    // 这里定义rules对象的结构，具体属性需要根据实际API文档定义
-  }>;
+  rules?: Array<NumberRule>;
   /**
    * 是否应用于已有编号
    */
   reformat_existing_record: boolean;
+}
+
+export type AddAutoNumberField = {
+  field_title: string,
+} & AutoNumberFieldProperty & SheetRequestPrams
+
+export const addAutoNumberField = (params:AddAutoNumberField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_autoNumber } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_AUTONUMBER,
+      property_autoNumber,
+    }],
+  }, options);
+}
+
+export type UpdateAutoNumberField = {
+  field_id: string,
+  field_title?: string,
+} & AutoNumberFieldProperty & SheetRequestPrams
+
+export const updateAutoNumberField = (params:UpdateAutoNumberField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_autoNumber } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_AUTONUMBER,
+      property_autoNumber,
+    }],
+  }, options);
 }
 
 // CurrencyFieldProperty
@@ -331,15 +958,51 @@ export type CurrencyFieldProperty = {
   /**
    * 输入类型
    */
-  currency_type: string; // 这里假设currency_type是一个字符串类型，具体值需要根据实际API文档定义
+  currency_type: CurrencyType;
   /**
    * 表示小数点的位数，即数字精度
    */
-  decimal_places: number;
+  decimal_places: DecimalPlaces;
   /**
    * 是否使用千位符
    */
   use_separate: boolean;
+}
+
+export type AddCurrencyField = {
+  field_title: string,
+} & CurrencyFieldProperty & SheetRequestPrams
+
+export const addCurrencyField = (params:AddCurrencyField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_currency } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_CURRENCY,
+      property_currency,
+    }],
+  }, options);
+}
+
+export type UpdateCurrencyField = {
+  field_id: string,
+  field_title?: string,
+} & CurrencyFieldProperty & SheetRequestPrams
+
+export const updateCurrencyField = (params:UpdateCurrencyField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_currency } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_CURRENCY,
+      property_currency,
+    }],
+  }, options);
 }
 
 // WwGroupFieldProperty
@@ -348,4 +1011,40 @@ export type WwGroupFieldProperty = {
    * 是否允许多个群聊
    */
   allow_multiple: boolean;
+}
+
+export type AddWwGroupField = {
+  field_title: string,
+} & WwGroupFieldProperty & SheetRequestPrams
+
+export const addWwGroupField = (params:AddWwGroupField, options: GetToken) => {
+  const { docid, sheet_id, field_title, ...property_wwGroup } = params;
+  return add({
+    docid,
+    sheet_id,
+    fields: [{
+      field_title,
+      field_type: FieldType.FIELD_TYPE_WWGROUP,
+      property_wwGroup,
+    }],
+  }, options);
+}
+
+export type UpdateWwGroupField = {
+  field_id: string,
+  field_title?: string,
+} & WwGroupFieldProperty & SheetRequestPrams
+
+export const updateWwGroupField = (params:UpdateWwGroupField, options: GetToken) => {
+  const { docid, sheet_id, field_id, field_title, ...property_wwGroup } = params;
+  return update({
+    docid,
+    sheet_id,
+    fields: [{
+      field_id,
+      field_title,
+      field_type: FieldType.FIELD_TYPE_WWGROUP,
+      property_wwGroup,
+    }],
+  }, options);
 }
