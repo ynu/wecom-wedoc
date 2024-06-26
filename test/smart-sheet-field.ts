@@ -39,9 +39,9 @@ describe('SmartSheet - Field', function() {
     if (!docid) {
       const res = await Doc.create({
         doc_type: 10,
-        doc_name: 'test',
+        doc_name: 'test2',
         // 设置了管理员才能看得到文档
-        admin_users: ["13908867120"]
+        admin_users: []
       }, options);
       docid = res.docid;
       console.log("docid: ", docid)
@@ -133,20 +133,18 @@ describe('SmartSheet - Field', function() {
     }, options);
     console.log(res);
   });
-  // todo 测试失败 错误信息为： Error: Smartsheet invalid datetime field
   it('添加日期类型字段', async () => {
     const res = await SmartSheet.Field.addDateTimeField({
       docid,
       sheet_id,
       field_title: 'test2',
-      format: 'yyyy-mm-dd',
+      format: 'd/m/yyyy',
       auto_fill: true,
     }, options);
     console.log(res);
     field_id = res[0].field_id
     field_type = res[0].field_type
   });
-  // todo 待测试
   it('更新日期类型字段', async () => {
     const res = await SmartSheet.Field.updateDateTimeField({
       docid,
@@ -262,7 +260,6 @@ describe('SmartSheet - Field', function() {
     }, options);
     console.log(res);
   });
-  // todo 测试失败 错误信息为： Error: Smartsheet invalid datetime field
   it('添加创建时间类型字段', async () => {
     const res = await SmartSheet.Field.addCreatedTimeField({
       docid,
@@ -274,7 +271,6 @@ describe('SmartSheet - Field', function() {
     field_id = res[0].field_id
     field_type = res[0].field_type
   });
-  // todo 待测试
   it('更新创建时间类型字段', async () => {
     const res = await SmartSheet.Field.updateCreatedTimeField({
       docid,
@@ -285,9 +281,8 @@ describe('SmartSheet - Field', function() {
     }, options);
     console.log(res);
   });
-  // todo 测试失败 错误信息为： Error: Smartsheet invalid datetime field
   it('添加最后编辑时间类型字段', async () => {
-    const res = await SmartSheet.Field.addCreatedTimeField({
+    const res = await SmartSheet.Field.addModifiedTimeField({
       docid,
       sheet_id,
       field_title: 'test2',
@@ -297,9 +292,8 @@ describe('SmartSheet - Field', function() {
     field_id = res[0].field_id
     field_type = res[0].field_type
   });
-  // todo 待测试
   it('更新最后编辑时间类型字段', async () => {
-    const res = await SmartSheet.Field.updateCreatedTimeField({
+    const res = await SmartSheet.Field.updateModifiedTimeField({
       docid,
       sheet_id,
       field_id,
@@ -329,7 +323,6 @@ describe('SmartSheet - Field', function() {
     }, options);
     console.log(res);
   });
-  // todo 测试失败 错误信息为： Error: Smartsheet invalid select field
   it('添加单选类型字段', async () => {
     const res = await SmartSheet.Field.addSingleSelectField({
       docid,
@@ -350,7 +343,6 @@ describe('SmartSheet - Field', function() {
     field_id = res[0].field_id
     field_type = res[0].field_type
   });
-  // todo 待测试
   it('更新单选类型字段', async () => {
     const res = await SmartSheet.Field.updateSingleSelectField({
       docid,
@@ -414,7 +406,6 @@ describe('SmartSheet - Field', function() {
     }, options);
     console.log(res);
   });
-  // todo 测试失败 错误信息为： Error: SmartsheetV2 Service Error
   it('添加自动编号类型字段', async () => {
     const res = await SmartSheet.Field.addAutoNumberField({
       docid,
@@ -431,7 +422,6 @@ describe('SmartSheet - Field', function() {
     field_id = res[0].field_id
     field_type = res[0].field_type
   });
-  // todo 待测试
   it('更新自动编号类型字段', async () => {
     const res = await SmartSheet.Field.updateAutoNumberField({
       docid,
@@ -472,7 +462,6 @@ describe('SmartSheet - Field', function() {
     }, options);
     console.log(res);
   });
-  // 测试结果：allow_multiple参数失效
   it('添加群类型字段', async () => {
     const res = await SmartSheet.Field.addWwGroupField({
       docid,
@@ -484,7 +473,6 @@ describe('SmartSheet - Field', function() {
     field_id = res[0].field_id
     field_type = res[0].field_type
   });
-  // 测试结果：allow_multiple参数失效
   it('更新群类型字段', async () => {
     const res = await SmartSheet.Field.updateWwGroupField({
       docid,

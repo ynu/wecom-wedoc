@@ -277,6 +277,7 @@ export const fields = async (params: SheetRequestPrams, options:GetToken): Promi
 export const add = async (params:AddFields, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_fields?access_token=${token}`, params);
+  console.log("res: ", res)
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
   return res.data?.fields;
 }
@@ -414,14 +415,14 @@ export type AddDateTimeField = {
 } & DateTimeFieldProperty & SheetRequestPrams
 
 export const addDateTimeField = (params:AddDateTimeField, options: GetToken) => {
-  const { docid, sheet_id, field_title, ...property_datetime } = params;
+  const { docid, sheet_id, field_title, ...property_date_time } = params;
   return add({
     docid,
     sheet_id,
     fields: [{
       field_title,
       field_type: FieldType.FIELD_TYPE_DATE_TIME,
-      property_datetime,
+      property_date_time,
     }],
   }, options);
 }
@@ -432,7 +433,7 @@ export type UpdateDateTimeField = {
 } & DateTimeFieldProperty & SheetRequestPrams
 
 export const updateDateTimeField = (params:UpdateDateTimeField, options: GetToken) => {
-  const { docid, sheet_id, field_id, field_title, ...property_datetime } = params;
+  const { docid, sheet_id, field_id, field_title, ...property_date_time } = params;
   return update({
     docid,
     sheet_id,
@@ -440,7 +441,7 @@ export const updateDateTimeField = (params:UpdateDateTimeField, options: GetToke
       field_id,
       field_title,
       field_type: FieldType.FIELD_TYPE_DATE_TIME,
-      property_datetime,
+      property_date_time,
     }],
   }, options);
 }
@@ -642,14 +643,14 @@ export type AddCreatedTimeField = {
 } & TimeFieldProperty & SheetRequestPrams
 
 export const addCreatedTimeField = (params:AddCreatedTimeField, options: GetToken) => {
-  const { docid, sheet_id, field_title, ...property_time } = params;
+  const { docid, sheet_id, field_title, ...property_created_time } = params;
   return add({
     docid,
     sheet_id,
     fields: [{
       field_title,
       field_type: FieldType.FIELD_TYPE_CREATED_TIME,
-      property_time,
+      property_created_time,
     }],
   }, options);
 }
@@ -678,14 +679,14 @@ export type AddModifiedTimeField = {
 } & TimeFieldProperty & SheetRequestPrams
 
 export const addModifiedTimeField = (params:AddModifiedTimeField, options: GetToken) => {
-  const { docid, sheet_id, field_title, ...property_time } = params;
+  const { docid, sheet_id, field_title, ...property_modified_time } = params;
   return add({
     docid,
     sheet_id,
     fields: [{
       field_title,
       field_type: FieldType.FIELD_TYPE_MODIFIED_TIME,
-      property_time,
+      property_modified_time,
     }],
   }, options);
 }
@@ -696,7 +697,7 @@ export type UpdateModifiedTimeField = {
 } & TimeFieldProperty & SheetRequestPrams
 
 export const updateModifiedTimeField = (params:UpdateModifiedTimeField, options: GetToken) => {
-  const { docid, sheet_id, field_id, field_title, ...property_time } = params;
+  const { docid, sheet_id, field_id, field_title, ...property_modified_time } = params;
   return update({
     docid,
     sheet_id,
@@ -704,7 +705,7 @@ export const updateModifiedTimeField = (params:UpdateModifiedTimeField, options:
       field_id,
       field_title,
       field_type: FieldType.FIELD_TYPE_MODIFIED_TIME,
-      property_time,
+      property_modified_time,
     }],
   }, options);
 }
@@ -770,14 +771,14 @@ export type AddSingleSelectField = {
 } & SingleSelectFieldProperty & SheetRequestPrams
 
 export const addSingleSelectField = (params:AddSingleSelectField, options: GetToken) => {
-  const { docid, sheet_id, field_title, ...property_singleSelect } = params;
+  const { docid, sheet_id, field_title, ...property_single_select } = params;
   return add({
     docid,
     sheet_id,
     fields: [{
       field_title,
       field_type: FieldType.FIELD_TYPE_SINGLE_SELECT,
-      property_singleSelect,
+      property_single_select,
     }],
   }, options);
 }
@@ -788,7 +789,7 @@ export type UpdateSingleSelectField = {
 } & SingleSelectFieldProperty & SheetRequestPrams
 
 export const updateSingleSelectField = (params:UpdateSingleSelectField, options: GetToken) => {
-  const { docid, sheet_id, field_id, field_title, ...property_singleSelect } = params;
+  const { docid, sheet_id, field_id, field_title, ...property_single_select } = params;
   return update({
     docid,
     sheet_id,
@@ -796,7 +797,7 @@ export const updateSingleSelectField = (params:UpdateSingleSelectField, options:
       field_id,
       field_title,
       field_type: FieldType.FIELD_TYPE_SINGLE_SELECT,
-      property_singleSelect,
+      property_single_select,
     }],
   }, options);
 }
@@ -922,14 +923,14 @@ export type AddAutoNumberField = {
 } & AutoNumberFieldProperty & SheetRequestPrams
 
 export const addAutoNumberField = (params:AddAutoNumberField, options: GetToken) => {
-  const { docid, sheet_id, field_title, ...property_autoNumber } = params;
+  const { docid, sheet_id, field_title, ...property_auto_number } = params;
   return add({
     docid,
     sheet_id,
     fields: [{
       field_title,
       field_type: FieldType.FIELD_TYPE_AUTONUMBER,
-      property_autoNumber,
+      property_auto_number,
     }],
   }, options);
 }
@@ -940,7 +941,7 @@ export type UpdateAutoNumberField = {
 } & AutoNumberFieldProperty & SheetRequestPrams
 
 export const updateAutoNumberField = (params:UpdateAutoNumberField, options: GetToken) => {
-  const { docid, sheet_id, field_id, field_title, ...property_autoNumber } = params;
+  const { docid, sheet_id, field_id, field_title, ...property_auto_number } = params;
   return update({
     docid,
     sheet_id,
@@ -948,7 +949,7 @@ export const updateAutoNumberField = (params:UpdateAutoNumberField, options: Get
       field_id,
       field_title,
       field_type: FieldType.FIELD_TYPE_AUTONUMBER,
-      property_autoNumber,
+      property_auto_number,
     }],
   }, options);
 }
@@ -1018,14 +1019,14 @@ export type AddWwGroupField = {
 } & WwGroupFieldProperty & SheetRequestPrams
 
 export const addWwGroupField = (params:AddWwGroupField, options: GetToken) => {
-  const { docid, sheet_id, field_title, ...property_wwGroup } = params;
+  const { docid, sheet_id, field_title, ...property_ww_group } = params;
   return add({
     docid,
     sheet_id,
     fields: [{
       field_title,
       field_type: FieldType.FIELD_TYPE_WWGROUP,
-      property_wwGroup,
+      property_ww_group,
     }],
   }, options);
 }
@@ -1036,7 +1037,7 @@ export type UpdateWwGroupField = {
 } & WwGroupFieldProperty & SheetRequestPrams
 
 export const updateWwGroupField = (params:UpdateWwGroupField, options: GetToken) => {
-  const { docid, sheet_id, field_id, field_title, ...property_wwGroup } = params;
+  const { docid, sheet_id, field_id, field_title, ...property_ww_group } = params;
   return update({
     docid,
     sheet_id,
@@ -1044,7 +1045,7 @@ export const updateWwGroupField = (params:UpdateWwGroupField, options: GetToken)
       field_id,
       field_title,
       field_type: FieldType.FIELD_TYPE_WWGROUP,
-      property_wwGroup,
+      property_ww_group,
     }],
   }, options);
 }
