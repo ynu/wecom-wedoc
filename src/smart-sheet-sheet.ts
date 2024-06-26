@@ -21,8 +21,14 @@ export type SheetRequestPrams = {
  * 记录(CommonRecord)中key的类型
  */
 export enum CellValueKeyType {
-  FIELD_TITLE = 'CELL_VALUE_KEY_TYPE_FIELD_TITLE',
-  FIELD_ID = 'CELL_VALUE_KEY_TYPE_FIELD_ID'
+  /**
+   * key用字段标题表示
+   */
+  CELL_VALUE_KEY_TYPE_FIELD_TITLE = "CELL_VALUE_KEY_TYPE_FIELD_TITLE",
+  /**
+   * key用字段 ID 表示
+   */
+  CELL_VALUE_KEY_TYPE_FIELD_ID = "CELL_VALUE_KEY_TYPE_FIELD_ID",
 }
 
 export type CommonRecord = {

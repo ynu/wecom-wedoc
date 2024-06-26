@@ -10,6 +10,11 @@ const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
 const debug = Debug('wecom-wedoc:debug');
 
+export type AddRecord = {
+  key_type?: CellValueKeyType,
+  records: [values: object],
+} & SheetRequestPrams
+
 /**
  * 查询记录
  * 本接口用于获取 Smartsheet 中某个子表下记录信息，该接口可以完成下面三种功能：获取全部记录信息、依据字段名和记录 ID 获取对应记录、对记录进行排序。
@@ -27,10 +32,10 @@ export const records = async (params: SheetRequestPrams, options: GetToken): Pro
  * 注意：不能通过添加记录接口给创建时间、最后编辑时间、创建人和最后编辑人四种类型的字段添加记录。
  * @see https://developer.work.weixin.qq.com/document/path/99907
  */
-export const add = async (params: SheetRequestPrams, options: GetToken): Promise<any[]> => {
+export const add = async (params: AddRecord, options: GetToken): Promise<any[]> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_records?access_token=${token}`, params);
-  return res.data;
+  return res.data?.records;
 }
 
 /**
@@ -41,7 +46,7 @@ export const add = async (params: SheetRequestPrams, options: GetToken): Promise
 export const del = async (params: SheetRequestPrams & { record_ids: string[] }, options: GetToken): Promise<any[]> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_records?access_token=${token}`, params);
-  return res.data;
+  return res.data.errcode;
 }
 
 /**

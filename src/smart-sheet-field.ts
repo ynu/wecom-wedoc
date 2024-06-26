@@ -10,217 +10,412 @@ const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
 const debug = Debug('wecom-wedoc:debug');
 
-// 定义字段类型的枚举
+
+/**
+ * 定义字段类型的枚举
+ */
 export enum FieldType {
-  // 文本
+  /**
+   * 文本类型
+   */
   FIELD_TYPE_TEXT = 'FIELD_TYPE_TEXT',
-  // 数字
+  /**
+   * 数字类型
+   */
   FIELD_TYPE_NUMBER = 'FIELD_TYPE_NUMBER',
-  // 复选框
+  /**
+   * 复选框类型
+   */
   FIELD_TYPE_CHECKBOX = 'FIELD_TYPE_CHECKBOX',
-  // 日期
+  /**
+   * 日期时间类型
+   */
   FIELD_TYPE_DATE_TIME = 'FIELD_TYPE_DATE_TIME',
-  // 图片
+  /**
+   * 图片类型
+   */
   FIELD_TYPE_IMAGE = 'FIELD_TYPE_IMAGE',
-  // 文件
+  /**
+   * 文件类型
+   */
   FIELD_TYPE_ATTACHMENT = 'FIELD_TYPE_ATTACHMENT',
-  // 成员
+  /**
+   * 成员类型
+   */
   FIELD_TYPE_USER = 'FIELD_TYPE_USER',
-  // 超链接
+  /**
+   * 超链接类型
+   */
   FIELD_TYPE_URL = 'FIELD_TYPE_URL',
-  // 多选
+  /**
+   * 多选类型
+   */
   FIELD_TYPE_SELECT = 'FIELD_TYPE_SELECT',
-  // 创建人
+  /**
+   * 创建人类型
+   */
   FIELD_TYPE_CREATED_USER = 'FIELD_TYPE_CREATED_USER',
-  // 最后编辑人
+  /**
+   * 最后编辑人类型
+   */
   FIELD_TYPE_MODIFIED_USER = 'FIELD_TYPE_MODIFIED_USER',
-  // 创建时间
+  /**
+   * 创建时间类型
+   */
   FIELD_TYPE_CREATED_TIME = 'FIELD_TYPE_CREATED_TIME',
-  // 最后编辑时间
+  /**
+   * 最后编辑时间类型
+   */
   FIELD_TYPE_MODIFIED_TIME = 'FIELD_TYPE_MODIFIED_TIME',
-  // 进度
+  /**
+   * 进度类型
+   */
   FIELD_TYPE_PROGRESS = 'FIELD_TYPE_PROGRESS',
-  // 电话
+  /**
+   * 电话类型
+   */
   FIELD_TYPE_PHONE_NUMBER = 'FIELD_TYPE_PHONE_NUMBER',
-  // 邮件
+  /**
+   * 邮件类型
+   */
   FIELD_TYPE_EMAIL = 'FIELD_TYPE_EMAIL',
-  // 单选
+  /**
+   * 单选类型
+   */
   FIELD_TYPE_SINGLE_SELECT = 'FIELD_TYPE_SINGLE_SELECT',
-  // 关联
+  /**
+   * 关联类型
+   */
   FIELD_TYPE_REFERENCE = 'FIELD_TYPE_REFERENCE',
-  // 地理位置
+  /**
+   * 地理位置类型
+   */
   FIELD_TYPE_LOCATION = 'FIELD_TYPE_LOCATION',
-  // 货币
+  /**
+   * 货币类型
+   */
   FIELD_TYPE_CURRENCY = 'FIELD_TYPE_CURRENCY',
-  // 群
+  /**
+   * 群组类型
+   */
   FIELD_TYPE_WWGROUP = 'FIELD_TYPE_WWGROUP',
-  // 自动编号
+  /**
+   * 自动编号类型
+   */
   FIELD_TYPE_AUTONUMBER = 'FIELD_TYPE_AUTONUMBER',
 }
 
-// 定义小数点后的位数
+
+/**
+ * 定义小数点后的位数
+ */
 export enum DecimalPlaces {
-  // 显示原值
+  /**
+   * 显示原值
+   */
   MINUS_ONE = -1,
-  // 代表整数
+  /**
+   * 代表整数
+   */
   ZERO = 0,
-  // 精确到小数点后一位（1.0）
+  /**
+   * 精确到小数点后一位（1.0）
+   */
   ONE = 1,
-  // 精确到小数点后一位（1.0）
+  /**
+   * 精确到小数点后一位（1.0）
+   */
   TWO = 2,
-  // 精确到小数点后一位（1.0）
+  /**
+   * 精确到小数点后一位（1.0）
+   */
   THREE = 3,
-  // 精确到小数点后一位（1.0）
+  /**
+   * 精确到小数点后一位（1.0）
+   */
   FOUR = 4,
 }
 
-// 展示样式
+/**
+ * 展示样式的枚举
+ */
 export enum DisplayMode {
-  // 列表样式
+  /**
+   * 列表样式
+   */
   DISPLAY_MODE_LIST = 'DISPLAY_MODE_LIST',
-  // 宫格样式
+  /**
+   * 宫格样式
+   */
   DISPLAY_MODE_GRID = 'DISPLAY_MODE_GRID',
 }
 
-// 超链接展示样式
+/**
+ * 超链接展示样式的枚举
+ */
 export enum LinkType {
-  // 文字
+  /**
+   * 纯文本
+   */
   LINK_TYPE_PURE_TEXT = 'LINK_TYPE_PURE_TEXT',
-  // 图标文字
+  /**
+   * 图标文字
+   */
   LINK_TYPE_ICON_TEXT = 'LINK_TYPE_ICON_TEXT',
 }
 
-// 自动编号类型
+/**
+ * 自动编号类型的枚举
+ */
 export enum NumberType {
-  // 自增数字类型
+  /**
+   * 自增数字类型
+   */
   NUMBER_TYPE_INCR = 'NUMBER_TYPE_INCR',
-  // 自定义类型
+  /**
+   * 自定义类型
+   */
   NUMBER_TYPE_CUSTOM = 'NUMBER_TYPE_CUSTOM',
 }
 
-// 数字规则类型
+/**
+ * 数字规则类型的枚举
+ */
 export enum NumberRuleType {
-  // 自增数字类型
+  /**
+   * 自增数字类型
+   */
   NUMBER_RULE_TYPE_INCR = 'NUMBER_RULE_TYPE_INCR',
-  // 固定字符
+  /**
+   * 固定字符
+   */
   NUMBER_RULE_TYPE_FIXED_CHAR = 'NUMBER_RULE_TYPE_FIXED_CHAR',
-  // 创建时间
+  /**
+   * 创建时间
+   */
   NUMBER_RULE_TYPE_TIME = 'NUMBER_RULE_TYPE_TIME',
 }
 
-// 货币符号类型
+/**
+ * 货币符号类型的枚举
+ */
 export enum CurrencyType {
-  // 人民币
+  /**
+   * 人民币
+   */
   CNY = 'CURRENCY_TYPE_CNY',
-  // 美元
+  /**
+   * 美元
+   */
   USD = 'CURRENCY_TYPE_USD',
-  // 欧元
+  /**
+   * 欧元
+   */
   EUR = 'CURRENCY_TYPE_EUR',
-  // 英镑
+  /**
+   * 英镑
+   */
   GBP = 'CURRENCY_TYPE_GBP',
-  // 日元
+  /**
+   * 日元
+   */
   JPY = 'CURRENCY_TYPE_JPY',
-  // 韩元
+  /**
+   * 韩元
+   */
   KRW = 'CURRENCY_TYPE_KRW',
-  // 港元
+  /**
+   * 港元
+   */
   HKD = 'CURRENCY_TYPE_HKD',
-  // 澳门元
+  /**
+   * 澳门元
+   */
   MOP = 'CURRENCY_TYPE_MOP',
-  // 新台币
+  /**
+   * 新台币
+   */
   TWD = 'CURRENCY_TYPE_TWD',
-  // 阿联酋迪拉姆
+  /**
+   * 阿联酋迪拉姆
+   */
   AED = 'CURRENCY_TYPE_AED',
-  // 澳大利亚元
+  /**
+   * 澳大利亚元
+   */
   AUD = 'CURRENCY_TYPE_AUD',
-  // 巴西雷亚尔
+  /**
+   * 巴西雷亚尔
+   */
   BRL = 'CURRENCY_TYPE_BRL',
-  // 加拿大元
+  /**
+   * 加拿大元
+   */
   CAD = 'CURRENCY_TYPE_CAD',
-  // 瑞士法郎
+  /**
+   * 瑞士法郎
+   */
   CHF = 'CURRENCY_TYPE_CHF',
-  // 印尼卢比
+  /**
+   * 印尼卢比
+   */
   IDR = 'CURRENCY_TYPE_IDR',
-  // 印度卢比
+  /**
+   * 印度卢比
+   */
   INR = 'CURRENCY_TYPE_INR',
-  // 墨西哥比索
+  /**
+   * 墨西哥比索
+   */
   MXN = 'CURRENCY_TYPE_MXN',
-  // 马来西亚林吉特
+  /**
+   * 马来西亚林吉特
+   */
   MYR = 'CURRENCY_TYPE_MYR',
-  // 菲律宾比索
+  /**
+   * 菲律宾比索
+   */
   PHP = 'CURRENCY_TYPE_PHP',
-  // 波兰兹罗提
+  /**
+   * 波兰兹罗提
+   */
   PLN = 'CURRENCY_TYPE_PLN',
-  // 俄罗斯卢布
+  /**
+   * 俄罗斯卢布
+   */
   RUB = 'CURRENCY_TYPE_RUB',
-  // 新加坡元
+  /**
+   * 新加坡元
+   */
   SGD = 'CURRENCY_TYPE_SGD',
-  // 泰国铢
+  /**
+   * 泰国铢
+   */
   THB = 'CURRENCY_TYPE_THB',
-  // 土耳其里拉
+  /**
+   * 土耳其里拉
+   */
   TRY = 'CURRENCY_TYPE_TRY',
-  // 越南盾
+  /**
+   * 越南盾
+   */
   VND = 'CURRENCY_TYPE_VND'
 }
-
-// 自动编号规则
+ 
+/**
+ * 自动编号规则
+ */
 export type NumberRule = {
+  /**
+   * 数字规则类型的枚举
+   */
   type: NumberRuleType,
+  /**
+   * 存放创建时间格式CreateTimeFormat 或固定字符，自增数字位数
+   */
   value: string,
 }
 
-// 创建时间格式,目前应用于自动编号规则中的value字段
+/**
+ * 创建时间格式的枚举，目前应用于自动编号规则中的value字段。
+ */
 export enum CreateTimeFormat {
-  // 格式说明：20240301
+  /**
+   * 格式说明：20240301
+   */
   YYYYMMDD = 'YYYYMMDD',
-  // 格式说明：202403
+  /**
+   * 格式说明：202403
+   */
   YYYYMM = 'YYYYMM',
-  // 格式说明：0301
+  /**
+   * 格式说明：0301
+   */
   MMDD = 'MMDD',
-  // 格式说明：2024
+  /**
+   * 格式说明：2024
+   */
   YYYY = 'YYYY',
-  // 格式说明：03
+  /**
+   * 格式说明：03
+   */
   MM = 'MM',
-  // 格式说明：01
+  /**
+   * 格式说明：01
+   */
   DD = 'DD',
 }
 
-// 选项颜色
+/**
+ * 选项颜色的枚举。
+ */
 export enum Style {
-  // 浅红
+  /**
+   * 浅红
+   */
   ONE = 1,
-  // 浅橙
+  /**
+   * 浅橙
+   */
   TWO = 2,
-  // 浅天蓝
+  /**
+   * 浅天蓝
+   */
   THREE = 3,
-  // 浅绿
+  /**
+   * 浅绿
+   */
   FOUR = 4,
-  // 浅紫
+  /**
+   * 浅紫
+   */
   FIVE = 5,
-  // 浅粉红
+  /**
+   * 浅粉红
+   */
   SIX = 6,
-  // 浅灰
+  /**
+   * 浅灰
+   */
   SEVEN = 7,
-  // 白
+  /**
+   * 白
+   */
   EIGHT = 8,
 }
 
-// 地理位置输入类型
+/**
+ * 地理位置输入类型的枚举。
+ */
 export enum LocationInputType {
-  // 手动输入
+  /**
+   * 手动输入
+   */
   LOCATION_INPUT_TYPE_MANUAL = 'LOCATION_INPUT_TYPE_MANUAL',
-  // 自动定位
+  /**
+   * 自动定位
+   */
   LOCATION_INPUT_TYPE_AUTO = 'LOCATION_INPUT_TYPE_AUTO',
 }
 
-// 多选和单选的选项参数
+/**
+ * 多选和单选的选项参数类型。
+ */
 export type Option = {
-  // 选项ID
+  /**
+   * 选项ID（可选）
+   */
   id?: string;
-  // 要填写的选项内容
+  /**
+   * 要填写的选项内容
+   */
   text: string;
-  // 选项颜色
+  /**
+   * 选项颜色
+   */
   style: Style;
 }
+
 
 /**
  * 设置日期格式
@@ -277,7 +472,6 @@ export const fields = async (params: SheetRequestPrams, options:GetToken): Promi
 export const add = async (params:AddFields, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_fields?access_token=${token}`, params);
-  console.log("res: ", res)
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
   return res.data?.fields;
 }
@@ -490,7 +684,6 @@ export const updateAttachmentField = (params:UpdateAttachmentField, options: Get
   }, options);
 }
 
-// UserFieldProperty
 export type UserFieldProperty = {
   /**
    * 允许添加多个人员
