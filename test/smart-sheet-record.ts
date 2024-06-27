@@ -130,6 +130,17 @@ describe('SmartSheet - Record', function() {
     record_id = res[0].record_id
     ok(res?.length);
   });
+  it('查询记录', async () => {
+    const res = await SmartSheet.Record.records({
+      docid,
+      sheet_id,
+      offset: 0,
+      limit: 1,
+      key_type: CellValueKeyType.CELL_VALUE_KEY_TYPE_FIELD_TITLE,
+    }, options);
+    console.log("records:", res);
+    ok(res?.length);
+  });
   it('删除记录', async () => {
     const res = await SmartSheet.Record.del({
       docid,
