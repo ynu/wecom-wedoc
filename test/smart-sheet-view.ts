@@ -53,7 +53,7 @@ describe('SmartSheet - Sheet', function() {
     console.log(res)
   });
   it('查询所有视图', async () => {
-    const res = await SmartSheet.View.views(docid, sheet_id, options);
+    const res = await SmartSheet.View.views({docid, sheet_id}, options);
     ok(res?.length);
     console.log(res);
   });

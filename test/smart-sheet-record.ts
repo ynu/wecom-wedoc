@@ -4,7 +4,7 @@ import {after, describe, it} from 'node:test';
 import {ok, equal} from 'node:assert';
 import {Doc, SmartSheet} from '../src';
 import {DecimalPlaces, FieldType} from '../src/smart-sheet-field';
-import {CellValueKeyType} from '../src/smart-sheet-sheet';
+import {AddRecords, CellTextValueType, CellValueKeyType} from "../src/smart-sheet-record";
 
 const {
   CORP_ID,
@@ -90,21 +90,64 @@ describe('SmartSheet - Record', function() {
     ok(res?.length);
   });
   it('添加记录', async () => {
-    const res = await SmartSheet.Record.add({
+    const addParams: AddRecords = {
       docid,
       sheet_id,
       key_type: CellValueKeyType.CELL_VALUE_KEY_TYPE_FIELD_TITLE,
       records: [{
         values: {
-          test: [{
-            type: "text",
+          文本: [{
+            type: CellTextValueType.TEXT,
             text: "文本内容"
           }],
-          test1: 3.3,
-          test3: true,
+          数字: 3.3,
+          复选框: true,
+          日期: "1719473922",
+          图片: [{
+            id: "1",
+            title: "图片",
+            image_url: "ceshi.png",
+            width: 50,
+            height: 50,
+          }],
+          文件: [{
+            doc_type: "2",
+            file_ext: "SMARTSHEET",
+            file_id: "FILEID",
+            file_type: "70",
+            file_url: "https://doc.weixin.qq.com/smartsheet/s3_AGIAbxQiAPgFddqx1miSyOlKgEJij_a?scode=AG8AhgeVABEFfNJ8De",
+            name: "智能表格",
+            size: 3267,
+          }],
+          成员: [{
+            user_id: ""
+          }],
+          链接: [{
+            link: "https://developer.work.weixin.qq.com/document/path/97392",
+            text: "企业微信开发者中心",
+            type: "url"
+          }],
+          多选字段: [{
+            id: "1"
+          }],
+          进度: 0.25,
+          电话: "",
+          邮箱: "2222222@qq.com",
+          货币: 2.33,
+          单选字段: [{
+            id: "1"
+          }],
+          地理位置: [{
+            id: "14313005936863363130",
+            latitude: "23.10647",
+            longitude: "113.32446",
+            source_type: 1,
+            title: "广州塔"
+          }]
         }
       }]
-    }, options);
+    }
+    const res = await SmartSheet.Record.add(addParams, options);
     console.log("records:", res[0]);
     record_id = res[0].record_id
     ok(res?.length);
@@ -117,12 +160,54 @@ describe('SmartSheet - Record', function() {
       records: [{
         record_id: record_id,
         values: {
-          test: [{
-            type: "text",
+          文本: [{
+            type: CellTextValueType.TEXT,
             text: "文本内容2"
           }],
-          test1: 3.32,
-          test3: true,
+          数字: 3.3,
+          复选框: true,
+          日期: "1719473922",
+          图片: [{
+            id: "1",
+            title: "图片",
+            image_url: "ceshi.png",
+            width: 50,
+            height: 50,
+          }],
+          文件: [{
+            doc_type: "2",
+            file_ext: "SMARTSHEET",
+            file_id: "FILEID",
+            file_type: "70",
+            file_url: "https://doc.weixin.qq.com/smartsheet/s3_AGIAbxQiAPgFddqx1miSyOlKgEJij_a?scode=AG8AhgeVABEFfNJ8De",
+            name: "智能表格",
+            size: 3267,
+          }],
+          成员: [{
+            user_id: ""
+          }],
+          链接: [{
+            link: "https://developer.work.weixin.qq.com/document/path/97392",
+            text: "企业微信开发者中心",
+            type: "url"
+          }],
+          多选字段: [{
+            id: "1"
+          }],
+          进度: 0.25,
+          电话: "",
+          邮箱: "2222222@qq.com",
+          货币: 2.33,
+          单选字段: [{
+            id: "1"
+          }],
+          地理位置: [{
+            id: "14313005936863363130",
+            latitude: "23.10647",
+            longitude: "113.32446",
+            source_type: 1,
+            title: "广州塔"
+          }]
         }
       }]
     }, options);
@@ -135,7 +220,7 @@ describe('SmartSheet - Record', function() {
       docid,
       sheet_id,
       offset: 0,
-      limit: 1,
+      limit: 10,
       key_type: CellValueKeyType.CELL_VALUE_KEY_TYPE_FIELD_TITLE,
     }, options);
     console.log("records:", res);

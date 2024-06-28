@@ -9,6 +9,13 @@ const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
 const debug = Debug('wecom-wedoc:debug');
 
+/**
+ * 用于查询Doc的请求参数结构
+ */
+export type DocRequestParams = {
+  docid: string,
+}
+
 export enum DocType {
   Document = 3,
   SpreadSheet = 4,

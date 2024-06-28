@@ -431,23 +431,53 @@ export type Option = {
  */
 export type Format = string
 
+/**
+ * 添加字段
+ */
 export type AddField = {
+  /**
+   * 字段标题
+   */
   field_title: string,
+  /**
+   * 字段类型
+   */
   field_type: FieldType,
+  /**
+   * 其它
+   */
   [key: string]: any,
 }
 
+/**
+ * 添加字段
+ */
 export type AddFields = {
+  /**
+   * 添加字段对象数组
+   */
   fields: AddField[],
 } & SheetRequestPrams
 
 export type DelFields = {
+  /**
+   * 字段id数组
+   */
   field_ids: string[]
 } & SheetRequestPrams
 
+/**
+ * 修改字段
+ */
 export type UpdateFields = {
   fields: {
+    /**
+     * 字段ID
+     */
     field_id: string,
+    /**
+     * 字段标题
+     */
     field_title?: string,
     field_type: FieldType,
     [key: string]: any,
