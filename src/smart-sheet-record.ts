@@ -4,7 +4,7 @@
 import axios from 'axios';
 import {GetToken, getToken, qyHost} from 'wecom-common';
 import Debug from 'debug';
-import {SheetRequestPrams} from './smart-sheet-sheet';
+import {GetSheet} from './smart-sheet-sheet';
 
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
@@ -78,7 +78,7 @@ export type AddRecords = {
    * 需要添加的记录的具体内容组成的 JSON 数组
    */
   records: Values[],
-} & KeyType & SheetRequestPrams
+} & KeyType & GetSheet
 
 /**
  * 更新记录对象,相比添加记录多了record_id字段
@@ -94,12 +94,12 @@ export type UpdateRecords = {
    * key值根据单元格的key类型动态改变
    */
   records: UpdateRecord[],
-} & KeyType & SheetRequestPrams
+} & KeyType & GetSheet
 
 /**
  * 删除记录
  */
-export type DelParams = { record_ids: string[]} & SheetRequestPrams
+export type DelParams = { record_ids: string[]} & GetSheet
 
 /**
  * 文本类型
@@ -328,7 +328,7 @@ export type QueryParams = {
    * 分页大小 , 每页返回多少条数据；当不填写该参数或将该参数设置为 0 时，如果总数大于 1000，一次性返回 1000 行记录，当总数小于 1000 时，返回全部记录；limit 最大值为 1000
    */
   limit?: number,
-} & SheetRequestPrams
+} & GetSheet
 
 /**
  * 查询记录

@@ -4,7 +4,7 @@
 import axios from 'axios';
 import { GetToken, WecomError, getToken, qyHost } from 'wecom-common';
 import Debug from 'debug';
-import { SheetRequestPrams } from './smart-sheet-sheet';
+import { GetSheet } from './smart-sheet-sheet';
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
@@ -457,14 +457,14 @@ export type AddFields = {
    * 添加字段对象数组
    */
   fields: AddField[],
-} & SheetRequestPrams
+} & GetSheet
 
 export type DelFields = {
   /**
    * 字段id数组
    */
   field_ids: string[]
-} & SheetRequestPrams
+} & GetSheet
 
 /**
  * 修改字段
@@ -482,13 +482,13 @@ export type UpdateFields = {
     field_type: FieldType,
     [key: string]: any,
   }[]
-} & SheetRequestPrams
+} & GetSheet
 /**
  * 查询字段
  * 本接口用于获取智能表中某个子表下字段信息，该接口可以完成下面三种功能：获取全部字段信息、依据字段名获取对应字段、依据字段 ID 获取对应字段信息。
  * @see https://developer.work.weixin.qq.com/document/path/99914
  */
-export const fields = async (params: SheetRequestPrams, options:GetToken): Promise<any[]> => {
+export const fields = async (params: GetSheet, options:GetToken): Promise<any[]> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/get_fields?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
@@ -548,7 +548,7 @@ export type NumberFieldProperty = {
 }
 export type AddNumberField = {
   field_title: string,
-} & NumberFieldProperty & SheetRequestPrams
+} & NumberFieldProperty & GetSheet
 export const addNumberField = (params:AddNumberField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_number } = params;
   return add({
@@ -565,7 +565,7 @@ export const addNumberField = (params:AddNumberField, options: GetToken) => {
 export type UpdateNumberField = {
   field_id: string,
   field_title?: string,
-} & NumberFieldProperty & SheetRequestPrams
+} & NumberFieldProperty & GetSheet
 export const updateNumberField = (params: UpdateNumberField, options: GetToken) => {
   const { docid, sheet_id, field_title, field_id, ...property_number } = params;
   let field = {
@@ -592,7 +592,7 @@ export type CheckboxFieldProperty = {
 
 export type AddCheckboxField = {
   field_title: string,
-} & CheckboxFieldProperty & SheetRequestPrams
+} & CheckboxFieldProperty & GetSheet
 
 export const addCheckboxField = (params:AddCheckboxField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_checkbox } = params;
@@ -610,7 +610,7 @@ export const addCheckboxField = (params:AddCheckboxField, options: GetToken) => 
 export type UpdateCheckboxField = {
   field_id: string,
   field_title?: string,
-} & CheckboxFieldProperty & SheetRequestPrams
+} & CheckboxFieldProperty & GetSheet
 
 export const updateCheckboxField = (params:UpdateCheckboxField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_checkbox } = params;
@@ -636,7 +636,7 @@ export type DateTimeFieldProperty = {
 }
 export type AddDateTimeField = {
   field_title: string,
-} & DateTimeFieldProperty & SheetRequestPrams
+} & DateTimeFieldProperty & GetSheet
 
 export const addDateTimeField = (params:AddDateTimeField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_date_time } = params;
@@ -654,7 +654,7 @@ export const addDateTimeField = (params:AddDateTimeField, options: GetToken) => 
 export type UpdateDateTimeField = {
   field_id: string,
   field_title?: string,
-} & DateTimeFieldProperty & SheetRequestPrams
+} & DateTimeFieldProperty & GetSheet
 
 export const updateDateTimeField = (params:UpdateDateTimeField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_date_time } = params;
@@ -680,7 +680,7 @@ export type AttachmentFieldProperty = {
 
 export type AddAttachmentField = {
   field_title: string,
-} & AttachmentFieldProperty & SheetRequestPrams
+} & AttachmentFieldProperty & GetSheet
 
 export const addAttachmentField = (params:AddAttachmentField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_attachment } = params;
@@ -698,7 +698,7 @@ export const addAttachmentField = (params:AddAttachmentField, options: GetToken)
 export type UpdateAttachmentField = {
   field_id: string,
   field_title?: string,
-} & AttachmentFieldProperty & SheetRequestPrams
+} & AttachmentFieldProperty & GetSheet
 
 export const updateAttachmentField = (params:UpdateAttachmentField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_attachment } = params;
@@ -727,7 +727,7 @@ export type UserFieldProperty = {
 
 export type AddUserField = {
   field_title: string,
-} & UserFieldProperty & SheetRequestPrams
+} & UserFieldProperty & GetSheet
 
 export const addUserField = (params:AddUserField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_user } = params;
@@ -745,7 +745,7 @@ export const addUserField = (params:AddUserField, options: GetToken) => {
 export type UpdateUserField = {
   field_id: string,
   field_title?: string,
-} & UserFieldProperty & SheetRequestPrams
+} & UserFieldProperty & GetSheet
 
 export const updateUserField = (params:UpdateUserField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_user } = params;
@@ -771,7 +771,7 @@ export type UrlFieldProperty = {
 
 export type AddUrlField = {
   field_title: string,
-} & UrlFieldProperty & SheetRequestPrams
+} & UrlFieldProperty & GetSheet
 
 export const addUrlField = (params:AddUrlField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_url } = params;
@@ -789,7 +789,7 @@ export const addUrlField = (params:AddUrlField, options: GetToken) => {
 export type UpdateUrlField = {
   field_id: string,
   field_title?: string,
-} & UrlFieldProperty & SheetRequestPrams
+} & UrlFieldProperty & GetSheet
 
 export const updateUrlField = (params:UpdateUrlField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_url } = params;
@@ -819,7 +819,7 @@ export type SelectFieldProperty = {
 
 export type AddSelectField = {
   field_title: string,
-} & SelectFieldProperty & SheetRequestPrams
+} & SelectFieldProperty & GetSheet
 
 export const addSelectField = (params:AddSelectField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_select } = params;
@@ -837,7 +837,7 @@ export const addSelectField = (params:AddSelectField, options: GetToken) => {
 export type UpdateSelectField = {
   field_id: string,
   field_title?: string,
-} & SelectFieldProperty & SheetRequestPrams
+} & SelectFieldProperty & GetSheet
 
 export const updateSelectField = (params:UpdateSelectField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_select } = params;
@@ -863,7 +863,7 @@ export type TimeFieldProperty = {
 
 export type AddCreatedTimeField = {
   field_title: string,
-} & TimeFieldProperty & SheetRequestPrams
+} & TimeFieldProperty & GetSheet
 
 export const addCreatedTimeField = (params:AddCreatedTimeField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_created_time } = params;
@@ -881,7 +881,7 @@ export const addCreatedTimeField = (params:AddCreatedTimeField, options: GetToke
 export type UpdateCreatedTimeField = {
   field_id: string,
   field_title?: string,
-} & TimeFieldProperty & SheetRequestPrams
+} & TimeFieldProperty & GetSheet
 
 export const updateCreatedTimeField = (params:UpdateCreatedTimeField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_time } = params;
@@ -899,7 +899,7 @@ export const updateCreatedTimeField = (params:UpdateCreatedTimeField, options: G
 
 export type AddModifiedTimeField = {
   field_title: string,
-} & TimeFieldProperty & SheetRequestPrams
+} & TimeFieldProperty & GetSheet
 
 export const addModifiedTimeField = (params:AddModifiedTimeField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_modified_time } = params;
@@ -917,7 +917,7 @@ export const addModifiedTimeField = (params:AddModifiedTimeField, options: GetTo
 export type UpdateModifiedTimeField = {
   field_id: string,
   field_title?: string,
-} & TimeFieldProperty & SheetRequestPrams
+} & TimeFieldProperty & GetSheet
 
 export const updateModifiedTimeField = (params:UpdateModifiedTimeField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_modified_time } = params;
@@ -943,7 +943,7 @@ export type ProgressFieldProperty = {
 
 export type AddProgressField = {
   field_title: string,
-} & ProgressFieldProperty & SheetRequestPrams
+} & ProgressFieldProperty & GetSheet
 
 export const addProgressField = (params:AddProgressField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_progress } = params;
@@ -961,7 +961,7 @@ export const addProgressField = (params:AddProgressField, options: GetToken) => 
 export type UpdateProgressField = {
   field_id: string,
   field_title?: string,
-} & ProgressFieldProperty & SheetRequestPrams
+} & ProgressFieldProperty & GetSheet
 
 export const updateProgressField = (params:UpdateProgressField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_progress } = params;
@@ -991,7 +991,7 @@ export type SingleSelectFieldProperty = {
 
 export type AddSingleSelectField = {
   field_title: string,
-} & SingleSelectFieldProperty & SheetRequestPrams
+} & SingleSelectFieldProperty & GetSheet
 
 export const addSingleSelectField = (params:AddSingleSelectField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_single_select } = params;
@@ -1009,7 +1009,7 @@ export const addSingleSelectField = (params:AddSingleSelectField, options: GetTo
 export type UpdateSingleSelectField = {
   field_id: string,
   field_title?: string,
-} & SingleSelectFieldProperty & SheetRequestPrams
+} & SingleSelectFieldProperty & GetSheet
 
 export const updateSingleSelectField = (params:UpdateSingleSelectField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_single_select } = params;
@@ -1047,7 +1047,7 @@ export type ReferenceFieldProperty = {
 
 export type AddReferenceField = {
   field_title: string,
-} & ReferenceFieldProperty & SheetRequestPrams
+} & ReferenceFieldProperty & GetSheet
 
 export const addReferenceField = (params:AddReferenceField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_reference } = params;
@@ -1065,7 +1065,7 @@ export const addReferenceField = (params:AddReferenceField, options: GetToken) =
 export type UpdateReferenceField = {
   field_id: string,
   field_title?: string,
-} & ReferenceFieldProperty & SheetRequestPrams
+} & ReferenceFieldProperty & GetSheet
 
 export const updateReferenceField = (params:UpdateReferenceField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_reference } = params;
@@ -1091,7 +1091,7 @@ export type LocationFieldProperty = {
 
 export type AddLocationField = {
   field_title: string,
-} & LocationFieldProperty & SheetRequestPrams
+} & LocationFieldProperty & GetSheet
 
 export const addLocationField = (params:AddLocationField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_location } = params;
@@ -1109,7 +1109,7 @@ export const addLocationField = (params:AddLocationField, options: GetToken) => 
 export type UpdateLocationField = {
   field_id: string,
   field_title?: string,
-} & LocationFieldProperty & SheetRequestPrams
+} & LocationFieldProperty & GetSheet
 
 export const updateLocationField = (params:UpdateLocationField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_location } = params;
@@ -1143,7 +1143,7 @@ export type AutoNumberFieldProperty = {
 
 export type AddAutoNumberField = {
   field_title: string,
-} & AutoNumberFieldProperty & SheetRequestPrams
+} & AutoNumberFieldProperty & GetSheet
 
 export const addAutoNumberField = (params:AddAutoNumberField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_auto_number } = params;
@@ -1161,7 +1161,7 @@ export const addAutoNumberField = (params:AddAutoNumberField, options: GetToken)
 export type UpdateAutoNumberField = {
   field_id: string,
   field_title?: string,
-} & AutoNumberFieldProperty & SheetRequestPrams
+} & AutoNumberFieldProperty & GetSheet
 
 export const updateAutoNumberField = (params:UpdateAutoNumberField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_auto_number } = params;
@@ -1195,7 +1195,7 @@ export type CurrencyFieldProperty = {
 
 export type AddCurrencyField = {
   field_title: string,
-} & CurrencyFieldProperty & SheetRequestPrams
+} & CurrencyFieldProperty & GetSheet
 
 export const addCurrencyField = (params:AddCurrencyField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_currency } = params;
@@ -1213,7 +1213,7 @@ export const addCurrencyField = (params:AddCurrencyField, options: GetToken) => 
 export type UpdateCurrencyField = {
   field_id: string,
   field_title?: string,
-} & CurrencyFieldProperty & SheetRequestPrams
+} & CurrencyFieldProperty & GetSheet
 
 export const updateCurrencyField = (params:UpdateCurrencyField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_currency } = params;
@@ -1239,7 +1239,7 @@ export type WwGroupFieldProperty = {
 
 export type AddWwGroupField = {
   field_title: string,
-} & WwGroupFieldProperty & SheetRequestPrams
+} & WwGroupFieldProperty & GetSheet
 
 export const addWwGroupField = (params:AddWwGroupField, options: GetToken) => {
   const { docid, sheet_id, field_title, ...property_ww_group } = params;
@@ -1257,7 +1257,7 @@ export const addWwGroupField = (params:AddWwGroupField, options: GetToken) => {
 export type UpdateWwGroupField = {
   field_id: string,
   field_title?: string,
-} & WwGroupFieldProperty & SheetRequestPrams
+} & WwGroupFieldProperty & GetSheet
 
 export const updateWwGroupField = (params:UpdateWwGroupField, options: GetToken) => {
   const { docid, sheet_id, field_id, field_title, ...property_ww_group } = params;

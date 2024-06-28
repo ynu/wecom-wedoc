@@ -4,7 +4,7 @@
 import axios from 'axios';
 import { GetToken, WecomError, getToken, qyHost } from 'wecom-common';
 import Debug from 'debug';
-import { DocRequestParams } from './doc';
+import { GetDoc } from './doc';
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
@@ -13,23 +13,23 @@ const debug = Debug('wecom-wedoc:debug');
 /**
  * 用于查询Sheet的请求参数结构
  */
-export type SheetRequestPrams = {
+export type GetSheet = {
   sheet_id: string,
-} & DocRequestParams
+} & GetDoc
 
 export type AddSheet = {
   properties?: {
     title?: string,
     index?: number,
   },
-} & DocRequestParams
+} & GetDoc
 
 export type UpdateSheet = {
   properties: {
     sheet_id: string,
     title: string,
   },
-} & DocRequestParams
+} & GetDoc
 
 /**
 * 查询子表
@@ -60,7 +60,7 @@ export const add = async (params: AddSheet, options: GetToken): Promise<any> => 
 /**
  * 删除子表
  */
-export const del = async (params: SheetRequestPrams, options: GetToken) => {
+export const del = async (params: GetSheet, options: GetToken) => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/delete_sheet?access_token=${token}`, params);
   if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);

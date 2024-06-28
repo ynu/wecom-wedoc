@@ -12,7 +12,7 @@ const debug = Debug('wecom-wedoc:debug');
 /**
  * 用于查询Doc的请求参数结构
  */
-export type DocRequestParams = {
+export type GetDoc = {
   docid: string,
 }
 

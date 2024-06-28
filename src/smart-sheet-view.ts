@@ -4,7 +4,7 @@
 import axios from 'axios';
 import {GetToken, getToken, qyHost, WecomError} from 'wecom-common';
 import Debug from 'debug';
-import { SheetRequestPrams } from './smart-sheet-sheet';
+import { GetSheet } from './smart-sheet-sheet';
 const warn = Debug('wecom-wedoc:warn');
 const error = Debug('wecom-wedoc:error');
 const info = Debug('wecom-wedoc:info');
@@ -183,12 +183,12 @@ export type ViewsRequestPrams = {
 /**
  * 查询视图类型
  */
-export type QueryParams = ViewRequestPrams & SheetRequestPrams
+export type QueryParams = ViewRequestPrams & GetSheet
 
 /**
  * 删除视图类型
  */
-export type DelParams = ViewsRequestPrams & SheetRequestPrams
+export type DelParams = ViewsRequestPrams & GetSheet
 
 /**
  * 甘特和日历类型,用于视图添加
@@ -224,7 +224,7 @@ export type AddParams = {
    * 日历视图属性，添加日历视图时必填
    */
   property_calendar?: GanttAndCalendartViewProperty,
-} & SheetRequestPrams
+} & GetSheet
 
 /**
  * 视图的排序/过滤/分组配置,用于更新视图
@@ -389,7 +389,7 @@ export type UpdateParams = {
    * 视图的排序/过滤/分组配置
    */
   property?: ViewProperty,
-} & ViewRequestPrams & SheetRequestPrams
+} & ViewRequestPrams & GetSheet
 
 
 
