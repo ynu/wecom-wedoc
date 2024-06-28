@@ -12,7 +12,7 @@ const debug = Debug('wecom-wedoc:debug');
 
 export type AddRecord = {
   key_type?: CellValueKeyType,
-  records: [values: object],
+  records: { values: object }[],
 } & SheetRequestPrams
 
 export type Sort = {
@@ -81,7 +81,7 @@ export const records = async (params: QueryParams, options: GetToken): Promise<a
 export const add = async (params: AddRecord, options: GetToken): Promise<any[]> => {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/add_records?access_token=${token}`, params);
-  return res.data?.records;
+  return res.data?.success ? res.data?.records : res.data;
 }
 
 /**
@@ -108,4 +108,9 @@ export const update = async (params: SheetRequestPrams & {
   const token = await getToken(options);
   const res = await axios.post(`${qyHost}/wedoc/smartsheet/update_records?access_token=${token}`, params);
   return res.data?.records;
+}
+
+export const getTextFromRecord = (record:any, name:string) => {
+  if (record.values[name]) return record.values[name][0].text;
+  else return null;
 }
