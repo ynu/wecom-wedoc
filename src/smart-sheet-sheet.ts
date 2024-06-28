@@ -37,11 +37,9 @@ export type UpdateSheet = {
 * @see https://developer.work.weixin.qq.com/document/path/99911
 * @returns 
 */
-export const sheets = async (docid: string, options: GetToken): Promise<any[]> => {
+export const sheets = async (params: GetDoc, options: GetToken): Promise<any[]> => {
  const token = await getToken(options);
- const res = await axios.post(`${qyHost}/wedoc/smartsheet/get_sheet?access_token=${token}`, {
-   docid,
- });
+ const res = await axios.post(`${qyHost}/wedoc/smartsheet/get_sheet?access_token=${token}`, params);
  if (res.data.errcode) throw new WecomError(res.data.errcode, res.data.errmsg);
  return res.data?.sheet_list;
 }
