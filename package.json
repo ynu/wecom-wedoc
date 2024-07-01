@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "企业微信-文档 SDK",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "compile": "tsc",
     "test": "mocha --timeout 10000 -r ts-node/register test/**/*.ts"
@@ -27,6 +28,7 @@
     "@types/memory-cache": "^0.2.5",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.14.2",
-    "assert": "^2.0.0"
+    "assert": "^2.0.0",
+    "typescript": "^5.5.2"
   }
 }
