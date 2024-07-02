@@ -1,6 +1,6 @@
 {
   "name": "wecom-wedoc",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "企业微信-文档 SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
