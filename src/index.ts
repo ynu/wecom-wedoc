@@ -43,4 +43,5 @@ export const modifyCollect = async (oper: any, formid: any, form_info: any, opti
 
 
 export * as Doc from './doc';
+export * as DocAuth from './doc-auth';
 export * as SmartSheet from './smart-sheet';
